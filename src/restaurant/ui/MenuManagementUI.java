@@ -13,10 +13,15 @@ import restaurant.dao.MenuItemDAO;
 import restaurant.model.MenuItem;
 
 import java.util.List;
+
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
+
 // Other necessary imports
 
-public class MenuManagementUI {
+public class MenuManagementUI extends Notification{
 
+    private static final Logger logger = LoggerFactory.getLogger(MenuManagementUI.class);
     private TableView<MenuItem> table;
 
     public VBox createMenuManagementUI() {
@@ -33,8 +38,12 @@ public class MenuManagementUI {
         // Buttons
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> addMenuItem(nameInput.getText(), priceInput.getText()));
+
         Button updateButton = new Button("Update"); // Add functionality for update
+        updateButton.setOnAction(e -> updateSelectedItem(nameInput.getText(), priceInput.getText()));
+        
         Button deleteButton = new Button("Delete"); // Add functionality for delete
+        deleteButton.setOnAction(e -> deleteSelectedItem());
 
         // Layout for input fields and buttons
         HBox inputLayout = new HBox(10);
@@ -45,6 +54,58 @@ public class MenuManagementUI {
         mainLayout.getChildren().addAll(table, inputLayout);
 
         return mainLayout;
+    }
+
+    private void updateSelectedItem(String name, String priceStr) {
+        // Validate inputs
+        if (name == null || name.trim().isEmpty()) {
+            showAlert("Invalid Input", "Name cannot be empty.");
+            return;
+        }
+
+        double price;
+        try {
+            price = Double.parseDouble(priceStr);
+            if (price < 0) {
+                showAlert("Invalid Input", "Price cannot be negative.");
+                return;
+            }
+        } catch (NumberFormatException e) {
+            showAlert("Invalid Input", "Price must be a number.");
+            return;
+        }
+
+        MenuItem selectedItem = table.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            // Assuming nameInput and priceInput are the input fields
+            selectedItem.setName(name);
+            selectedItem.setPrice(Double.parseDouble(priceStr));
+            // Update other fields as necessary
+
+            // Save the updated item to the database
+            MenuItemDAO menuItemDAO = new MenuItemDAO();
+            menuItemDAO.updateMenuItem(selectedItem);
+
+            // Refresh the table
+            refreshMenuItemsTable();
+        } else {
+            // Handle case where no item is selected (e.g., show an alert)
+        }
+    }
+
+
+    private void deleteSelectedItem() {
+        MenuItem selectedItem = table.getSelectionModel().getSelectedItem();
+        if (selectedItem != null) {
+            // Delete the selected item from the database
+            MenuItemDAO menuItemDAO = new MenuItemDAO();
+            menuItemDAO.deleteMenuItem(selectedItem.getItemId()); // Assuming MenuItem has an 'getId' method
+
+            // Update the UI
+            refreshMenuItemsTable();
+        } else {
+            // Handle case where no item is selected (e.g., show an alert)
+        }
     }
 
     private void setupTable() {
@@ -92,11 +153,6 @@ public class MenuManagementUI {
 
         // Optionally, update your UI here (e.g., refresh the table to show the new item)
         refreshMenuItemsTable();
-    }
-
-    private void showAlert(String title, String message) {
-        // Implementation to show an alert dialog.
-        // This can vary based on whether you're using JavaFX, Swing, etc.
     }
 
     private void refreshMenuItemsTable() {

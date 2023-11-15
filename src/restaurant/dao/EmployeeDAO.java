@@ -16,7 +16,6 @@ public class EmployeeDAO {
         String sql = "INSERT INTO Employees (EmployeeID, Name, Role, ContactInfo, HireDate) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, employee.getEmployeeId());
             pstmt.setString(2, employee.getName());
             pstmt.setString(3, employee.getRole());
             pstmt.setString(4, employee.getContactInfo());
