@@ -16,7 +16,6 @@ public class MenuItemDAO {
         String sql = "INSERT INTO MenuItems (ItemID, Name, Description, Price, Category) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnector.connect();
              PreparedStatement pstmt = conn.prepareStatement(sql)) {
-            pstmt.setInt(1, item.getItemId());
             pstmt.setString(2, item.getName());
             pstmt.setString(3, item.getDescription());
             pstmt.setDouble(4, item.getPrice());
