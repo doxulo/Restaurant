@@ -11,7 +11,7 @@ import java.util.List;
 
 public class EmployeeDAO {
 
-    // Insert Employee
+    
     public void insertEmployee(Employee employee) {
         String sql = "INSERT INTO Employees (EmployeeID, Name, Role, ContactInfo, HireDate) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnector.connect();
@@ -50,7 +50,7 @@ public class EmployeeDAO {
         return employee;
     }
 
-    // Get All Employees
+    
     public List<Employee> getAllEmployees() {
         List<Employee> employees = new ArrayList<>();
         String sql = "SELECT * FROM Employees";
@@ -72,7 +72,7 @@ public class EmployeeDAO {
         return employees;
     }
 
-    // Update Employee
+    
     public void updateEmployee(Employee employee) {
         String sql = "UPDATE Employees SET Name = ?, Role = ?, ContactInfo = ?, HireDate = ? WHERE EmployeeID = ?";
         try (Connection conn = DatabaseConnector.connect();
@@ -88,7 +88,7 @@ public class EmployeeDAO {
         }
     }
 
-    // Delete Employee
+    
     public void deleteEmployee(int employeeId) {
         String sql = "DELETE FROM Employees WHERE EmployeeID = ?";
         try (Connection conn = DatabaseConnector.connect();

@@ -7,7 +7,7 @@ public class MenuItem {
     private double price;
     private String category;
 
-    // Constructor
+    
     public MenuItem(int itemId, String name, String description, double price, String category) {
         this.itemId = itemId;
         this.name = name;
@@ -16,7 +16,7 @@ public class MenuItem {
         this.category = category;
     }
 
-    // Getters and Setters
+    
     public int getItemId() {
         return itemId;
     }
@@ -57,7 +57,7 @@ public class MenuItem {
         this.category = category;
     }
 
-    // toString method for easy printing of MenuItem details
+    
     @Override
     public String toString() {
         return "MenuItem{" +

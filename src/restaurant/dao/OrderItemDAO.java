@@ -11,7 +11,7 @@ import java.util.List;
 
 public class OrderItemDAO {
 
-    // Insert OrderItem
+    
     public void insertOrderItem(OrderItem orderItem) {
         String sql = "INSERT INTO OrderItems (OrderItemID, OrderID, ItemID, Quantity) VALUES (?, ?, ?, ?)";
         try (Connection conn = DatabaseConnector.connect();
@@ -26,7 +26,7 @@ public class OrderItemDAO {
         }
     }
 
-    // Get Order Item by ID
+    
     public List<OrderItem> getOrderItemsByOrderId(int orderId) {
         List<OrderItem> orderItems = new ArrayList<>();
         String sql = "SELECT * FROM OrderItems WHERE OrderID = ?";
@@ -51,7 +51,7 @@ public class OrderItemDAO {
         return orderItems;
     }
 
-    // Get All OrderItems
+    
     public List<OrderItem> getAllOrderItems() {
         List<OrderItem> orderItems = new ArrayList<>();
         String sql = "SELECT * FROM OrderItems";
@@ -71,7 +71,7 @@ public class OrderItemDAO {
         }
         return orderItems;
     }
-    // Update OrderItem
+    
 
     public void updateOrderItem(OrderItem orderItem) {
         String sql = "UPDATE OrderItems SET OrderID = ?, ItemID = ?, Quantity = ? WHERE OrderItemID = ?";
@@ -86,7 +86,7 @@ public class OrderItemDAO {
             System.out.println(e.getMessage());
         }
     }
-    // Delete OrderItem
+    
 
     public void deleteOrderItem(int orderItemId) {
         String sql = "DELETE FROM OrderItems WHERE OrderItemID = ?";

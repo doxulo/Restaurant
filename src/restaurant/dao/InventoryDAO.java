@@ -11,7 +11,7 @@ import java.util.List;
 
 public class InventoryDAO {
 
-    // Insert Inventory Item
+    
     public void insertInventoryItem(Inventory item) {
         String sql = "INSERT INTO Inventory (InventoryID, ItemName, Quantity, ReorderLevel) VALUES (?, ?, ?, ?)";
         try (Connection conn = DatabaseConnector.connect();
@@ -26,7 +26,7 @@ public class InventoryDAO {
         }
     }
 
-    // Get All Inventory Items
+    
     public List<Inventory> getAllInventoryItems() {
         List<Inventory> inventoryList = new ArrayList<>();
         String sql = "SELECT * FROM Inventory";
@@ -47,7 +47,7 @@ public class InventoryDAO {
         return inventoryList;
     }
 
-    // Update Inventory Item
+    
     public void updateInventoryItem(Inventory item) {
         String sql = "UPDATE Inventory SET ItemName = ?, Quantity = ?, ReorderLevel = ? WHERE InventoryID = ?";
         try (Connection conn = DatabaseConnector.connect();
@@ -62,7 +62,7 @@ public class InventoryDAO {
         }
     }
 
-    // Delete Inventory Item
+    
     public void deleteInventoryItem(int inventoryId) {
         String sql = "DELETE FROM Inventory WHERE InventoryID = ?";
         try (Connection conn = DatabaseConnector.connect();

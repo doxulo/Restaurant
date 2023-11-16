@@ -6,7 +6,7 @@ public class OrderItem {
     private int itemId;
     private int quantity;
 
-    // Constructor
+    
     public OrderItem(int orderItemId, int orderId, int itemId, int quantity) {
         this.orderItemId = orderItemId;
         this.orderId = orderId;
@@ -14,7 +14,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    // Getters and Setters
+    
     public int getOrderItemId() {
         return orderItemId;
     }
@@ -47,7 +47,7 @@ public class OrderItem {
         this.quantity = quantity;
     }
 
-    // toString method for easy printing of OrderItem details
+    
     @Override
     public String toString() {
         return "OrderItem{" +

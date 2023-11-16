@@ -7,7 +7,7 @@ public class Transaction {
     private double amount;
     private String transactionDate;
 
-    // Constructor
+    
     public Transaction(int transactionId, int orderId, String paymentType, double amount, String transactionDate) {
         this.transactionId = transactionId;
         this.orderId = orderId;
@@ -16,7 +16,7 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    // Getters and Setters
+    
     public int getTransactionId() {
         return transactionId;
     }
@@ -57,7 +57,7 @@ public class Transaction {
         this.transactionDate = transactionDate;
     }
 
-    // toString method for easy printing of Transaction details
+    
     @Override
     public String toString() {
         return "Transaction{" +

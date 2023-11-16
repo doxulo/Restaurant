@@ -17,14 +17,14 @@ public class MainApp extends Application {
 
     @Override
     public void start(Stage primaryStage) {
-        // Root layout
+        
         BorderPane root = new BorderPane();
 
-        // Setting up the menu bar
+        
         MenuBar menuBar = new MenuBar();
         root.setTop(menuBar);
 
-        // Menu for Menu Management
+        
         Menu menuManagement = new Menu("Menu Management");
 
         MenuItem orderManagement = new MenuItem("Order");
@@ -38,11 +38,11 @@ public class MainApp extends Application {
         orderManagement.setOnAction((e -> showOrderManagement(root)));
         menuItemMenuManagement.setOnAction(e -> showMenuManagement(root));
         employeeManagement.setOnAction(e -> showEmployeeManagement(root));
-        // Add other menus similarly...
+        
 
-        menuBar.getMenus().addAll(menuManagement); // Add more menus as needed
+        menuBar.getMenus().addAll(menuManagement); 
 
-        // Setting up the scene
+        
         Scene scene = new Scene(root, 800, 600);
         primaryStage.setTitle("Restaurant POS System");
         primaryStage.setScene(scene);
@@ -50,24 +50,24 @@ public class MainApp extends Application {
     }
 
     private void showOrderManagement(BorderPane root) {
-        // Logic to display the menu management UI
-        // Replace with your actual UI code
+        
+        
         root.setCenter(new OrderUI().createOrderUI());
     }
 
     private void showEmployeeManagement(BorderPane root) {
-        // Logic to display the menu management UI
-        // Replace with your actual UI code
+        
+        
         root.setCenter(new EmployeeManagementUI().createEmployeeManagementUI());
     }
 
     private void showMenuManagement(BorderPane root) {
-        // Logic to display the menu management UI
-        // Replace with your actual UI code
+        
+        
         root.setCenter(new MenuManagementUI().createMenuManagementUI());
     }
 
-    // Similarly, add methods for other sections like showOrderProcessing, showInventoryManagement, etc.
+    
 
     public static void main(String[] args) {
         launch(args);
