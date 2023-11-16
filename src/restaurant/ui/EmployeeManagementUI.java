@@ -39,8 +39,10 @@ public class EmployeeManagementUI extends Notification {
         // Buttons for Add, Update, Delete
         Button addButton = new Button("Add");
         addButton.setOnAction(e -> addEmployee(nameInput.getText(), roleInput.getText(), contactInfoInput.getText(), hireDateInput.getText()));
-        Button updateButton = new Button("Update"); // Implement update functionality
-        Button deleteButton = new Button("Delete"); // Implement delete functionality
+        Button updateButton = new Button("Update");
+        updateButton.setOnAction(e -> updateEmployee(nameInput.getText(), roleInput.getText(), contactInfoInput.getText(), hireDateInput.getText()));
+        Button deleteButton = new Button("Delete");
+        deleteButton.setOnAction(e -> deleteSelectedEmployee());
 
         // Layout for input fields and buttons
         HBox inputLayout = new HBox(10);
@@ -51,6 +53,20 @@ public class EmployeeManagementUI extends Notification {
         mainLayout.getChildren().addAll(table, inputLayout);
 
         return mainLayout;
+    }
+
+    private void deleteSelectedEmployee() {
+        Employee selectedEmployee = table.getSelectionModel().getSelectedItem();
+        if (selectedEmployee != null) {
+            // Delete the selected item from the database
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            employeeDAO.deleteEmployee(selectedEmployee.getEmployeeId()); // Assuming MenuItem has an 'getId' method
+
+            // Update the UI
+            refreshEmployeeTable();
+        } else {
+            // Handle case where no item is selected (e.g., show an alert)
+        }
     }
 
     private void setupTable() {
@@ -94,6 +110,37 @@ public class EmployeeManagementUI extends Notification {
 
         // Optionally, update your UI here (e.g., refresh the table to show the new item)
         refreshEmployeeTable();
+    }
+
+    private void updateEmployee(String name, String role, String contactInfo, String hireDate) {
+        // Validate inputs
+        if (name == null || name.trim().isEmpty()) {
+            showAlert("Invalid Input", "Name cannot be empty.");
+            return;
+        }
+
+        if (role == null || role.trim().isEmpty()) {
+            showAlert("Invalid Input", "Role cannot be empty.");
+        }
+
+        Employee selectedEmployee = table.getSelectionModel().getSelectedItem();
+        if (selectedEmployee != null) {
+            // Assuming nameInput and priceInput are the input fields
+            selectedEmployee.setName(name);
+            selectedEmployee.setRole(role);
+            selectedEmployee.setContactInfo(contactInfo);
+            selectedEmployee.setHireDate(hireDate);
+            // Update other fields as necessary
+
+            // Save the updated item to the database
+            EmployeeDAO employeeDAO = new EmployeeDAO();
+            employeeDAO.updateEmployee(selectedEmployee);
+
+            // Refresh the table
+            refreshEmployeeTable();
+        } else {
+            // Handle case where no item is selected (e.g., show an alert)
+        }
     }
 
     private void refreshEmployeeTable() {

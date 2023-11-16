@@ -9,6 +9,6 @@ public class Notification {
         alert.setHeaderText(null);
         alert.setContentText(s);
 
-        alert.showAndWait();
+        alert.show();
     }
 }
