@@ -1,5 +1,7 @@
 package restaurant.model;
 
+import restaurant.ui.UIOrderItem;
+
 public class MenuItem {
     private int itemId;
     private String name;
@@ -67,5 +69,9 @@ public class MenuItem {
                 ", price=" + price +
                 ", category='" + category + '\'' +
                 '}';
+    }
+
+    public boolean equals(MenuItem item) {
+        return this.getItemId() == item.getItemId();
     }
 }

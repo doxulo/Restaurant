@@ -1,5 +1,6 @@
 package restaurant.ui;
 
+import javafx.beans.property.ReadOnlyObjectWrapper;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.scene.control.*;
@@ -9,21 +10,24 @@ import javafx.scene.layout.HBox;
 import javafx.scene.layout.Priority;
 import javafx.geometry.Insets;
 import restaurant.dao.MenuItemDAO;
+import restaurant.model.Employee;
 import restaurant.model.Order;
 import restaurant.model.MenuItem;
 
 import java.util.List;
+import java.util.ArrayList;
 
 
 public class OrderUI {
 
     private TableView<MenuItem> menuItemsTable;
-    private TableView<MenuItem> orderItemsTable; 
+    private TableView<UIOrderItem> orderItemsTable; 
     private ChoiceBox<String> categoryFilter; 
 
+    private List<UIOrderItem> currentOrderItems = new ArrayList<>();
+    
     public VBox createOrderUI() {
         menuItemsTable = new TableView<>();
-
         orderItemsTable = new TableView<>();
 
 
@@ -31,15 +35,18 @@ public class OrderUI {
         setupOrderItemsTable();
 
         categoryFilter = new ChoiceBox<>();
-        categoryFilter.getItems().addAll(new String[]{"Appetizers", "Entrées", "Side Dishes", "Desserts", "Beverages"});
+        categoryFilter.getItems().addAll("Appetizers", "Entrées", "Side Dishes", "Desserts", "Beverages");
         
         categoryFilter.setOnAction(e -> updateMenuItems(categoryFilter.getValue()));
 
         TextField quantityInput = new TextField();
         quantityInput.setPromptText("Quantity");
 
-        Button addOrderButton = new Button("Add Order");
-        addOrderButton.setOnAction(e -> addItemToOrder(Integer.parseInt(quantityInput.getText())));
+        Button addToOrderButton = new Button("Add to order");
+        addToOrderButton.setOnAction(e -> addItemToOrder(quantityInput.getText()));
+
+        Button clearOrderButton = new Button("Clear order");
+        clearOrderButton.setOnAction(e -> clearOrder());
 
         
 
@@ -48,14 +55,23 @@ public class OrderUI {
         HBox.setHgrow(menuItemsTable, Priority.ALWAYS);
         HBox.setHgrow(orderItemsTable, Priority.ALWAYS);
 
+        tablesLayout.setPadding(new Insets(10));
+
         HBox controlsLayout = new HBox(10);
-        controlsLayout.getChildren().addAll(categoryFilter, quantityInput, addOrderButton);
+        controlsLayout.getChildren().addAll(categoryFilter, quantityInput, addToOrderButton, clearOrderButton);
+
+        controlsLayout.setPadding(new Insets(0, 10, 0, 10));
 
         VBox mainLayout = new VBox(10);
         mainLayout.getChildren().addAll(tablesLayout, controlsLayout);
         VBox.setMargin(controlsLayout, new Insets(10, 0, 0, 0)); 
 
         return mainLayout;
+    }
+
+    private void clearOrder() {
+        currentOrderItems = new ArrayList<>();
+        refreshOrderItemsTable();
     }
 
     private void updateMenuItems(String category) {
@@ -70,8 +86,30 @@ public class OrderUI {
         menuItemsTable.setItems(observableList);
     }
 
-    private void addItemToOrder(int i) {
+    private void addItemToOrder(String i) {
+        MenuItem selectedItem = menuItemsTable.getSelectionModel().getSelectedItem();
+        int quantity = Integer.parseInt(i); 
 
+        
+        UIOrderItem existingItem = currentOrderItems.stream()
+                .filter(uiOrderItem -> uiOrderItem.getMenuItem().equals(selectedItem))
+                .findFirst()
+                .orElse(null);
+
+        if (existingItem != null) {
+            
+            existingItem.setQuantity(existingItem.getQuantity() + quantity);
+        } else {
+            
+            currentOrderItems.add(new UIOrderItem(selectedItem, quantity));
+        }
+
+        refreshOrderItemsTable();
+    }
+
+    private void refreshOrderItemsTable() {
+        ObservableList<UIOrderItem> items = FXCollections.observableArrayList(currentOrderItems);
+        orderItemsTable.setItems(items);
     }
 
     private void setupMenuItemsTable() {
@@ -111,8 +149,22 @@ public class OrderUI {
     }
 
     private void setupOrderItemsTable() {
+        orderItemsTable.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
         
+        TableColumn<UIOrderItem, String> itemNameColumn = new TableColumn<>("Item Name");
+        itemNameColumn.setCellValueFactory(new PropertyValueFactory<>("menuItemName"));
+
+        
+        TableColumn<UIOrderItem, Double> itemPriceColumn = new TableColumn<>("Price");
+        itemPriceColumn.setCellValueFactory(cellData -> new ReadOnlyObjectWrapper<>(cellData.getValue().getMenuItem().getPrice()));
+
+        
+        TableColumn<UIOrderItem, Integer> quantityColumn = new TableColumn<>("Quantity");
+        quantityColumn.setCellValueFactory(cellData -> cellData.getValue().quantityProperty().asObject());
+
+        orderItemsTable.getColumns().addAll(itemNameColumn, itemPriceColumn, quantityColumn);
     }
+
 
     
 }

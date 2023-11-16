@@ -37,7 +37,7 @@ public class MenuManagementUI extends Notification{
         priceInput.setPromptText("Price");
 
         ChoiceBox categoryInput = new ChoiceBox();
-        categoryInput.getItems().addAll(new String[]{"Appetizers", "Entrées", "Side Dishes", "Desserts", "Beverages"});
+        categoryInput.getItems().addAll("Appetizers", "Entrées", "Side Dishes", "Desserts", "Beverages");
 
         
         Text text1 = new Text();
