@@ -100,4 +100,25 @@ public class MenuItemDAO {
             System.out.println(e.getMessage());
         }
     }
+
+    public List<MenuItem> getMenuItemByCategory(String category) {
+        List<MenuItem> menuItems = new ArrayList<>();
+        String sql = "SELECT * FROM MenuItems WHERE Category = \"" + category + "\"";
+        try (Connection conn = DatabaseConnector.connect();
+             PreparedStatement pstmt = conn.prepareStatement(sql);
+             ResultSet rs = pstmt.executeQuery()) {
+            while (rs.next()) {
+                MenuItem item = new MenuItem(
+                        rs.getInt("ItemID"),
+                        rs.getString("Name"),
+                        rs.getString("Description"),
+                        rs.getDouble("Price"),
+                        rs.getString("Category"));
+                menuItems.add(item);
+            }
+        } catch (SQLException e) {
+            System.out.println(e.getMessage());
+        }
+        return menuItems;
+    }
 }

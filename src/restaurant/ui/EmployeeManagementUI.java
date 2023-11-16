@@ -70,6 +70,8 @@ public class EmployeeManagementUI extends Notification {
     }
 
     private void setupTable() {
+        table.setColumnResizePolicy(TableView.CONSTRAINED_RESIZE_POLICY);
+
         // Define table columns for Employee properties
         TableColumn<Employee, String> nameColumn = new TableColumn<>("Name");
         nameColumn.setCellValueFactory(new PropertyValueFactory<>("name"));

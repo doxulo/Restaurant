@@ -11,6 +11,7 @@ import restaurant.ui.EmployeeManagementUI;
 import restaurant.ui.MenuManagementUI;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
+import restaurant.ui.OrderUI;
 
 public class MainApp extends Application {
 
@@ -26,12 +27,15 @@ public class MainApp extends Application {
         // Menu for Menu Management
         Menu menuManagement = new Menu("Menu Management");
 
+        MenuItem orderManagement = new MenuItem("Order");
         MenuItem menuItemMenuManagement = new MenuItem("Manage Menu Items");
         MenuItem employeeManagement = new MenuItem("Manage Employees");
 
+        menuManagement.getItems().add(orderManagement);
         menuManagement.getItems().add(menuItemMenuManagement);
         menuManagement.getItems().add(employeeManagement);
 
+        orderManagement.setOnAction((e -> showOrderManagement(root)));
         menuItemMenuManagement.setOnAction(e -> showMenuManagement(root));
         employeeManagement.setOnAction(e -> showEmployeeManagement(root));
         // Add other menus similarly...
@@ -43,6 +47,12 @@ public class MainApp extends Application {
         primaryStage.setTitle("Restaurant POS System");
         primaryStage.setScene(scene);
         primaryStage.show();
+    }
+
+    private void showOrderManagement(BorderPane root) {
+        // Logic to display the menu management UI
+        // Replace with your actual UI code
+        root.setCenter(new OrderUI().createOrderUI());
     }
 
     private void showEmployeeManagement(BorderPane root) {
