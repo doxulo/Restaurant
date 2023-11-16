@@ -1,9 +1,10 @@
 # Restaurant POS System
 
 ## Introduction
-Describe your project briefly. Explain what it does and its main features.
+In progress
 
 ## Features
+This is all planning
 - Automated Kitchen Order Prioritization
 - Face Detection for Customer Recognition
 - Employee Management
