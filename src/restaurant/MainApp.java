@@ -26,15 +26,12 @@ public class MainApp extends Application {
         // Menu for Menu Management
         Menu menuManagement = new Menu("Menu Management");
 
-        MenuItem homeMenuManagement = new MenuItem("Home");
         MenuItem menuItemMenuManagement = new MenuItem("Manage Menu Items");
         MenuItem employeeManagement = new MenuItem("Manage Employees");
 
-        menuManagement.getItems().add(homeMenuManagement);
         menuManagement.getItems().add(menuItemMenuManagement);
         menuManagement.getItems().add(employeeManagement);
 
-        homeMenuManagement.setOnAction(e -> showHome(root));
         menuItemMenuManagement.setOnAction(e -> showMenuManagement(root));
         employeeManagement.setOnAction(e -> showEmployeeManagement(root));
         // Add other menus similarly...
@@ -52,10 +49,6 @@ public class MainApp extends Application {
         // Logic to display the menu management UI
         // Replace with your actual UI code
         root.setCenter(new EmployeeManagementUI().createEmployeeManagementUI());
-    }
-
-    private void showHome(BorderPane root) {
-
     }
 
     private void showMenuManagement(BorderPane root) {

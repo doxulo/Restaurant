@@ -8,7 +8,6 @@ public class DatabaseConnector {
     public static Connection connect() {
         Connection conn = null;
         try {
-            // dbPath is the relative path to the SQLite database
             String dbPath = "database/Restaurant.db";
             conn = DriverManager.getConnection("jdbc:sqlite:" + dbPath);
         } catch (SQLException e) {
