@@ -2,6 +2,7 @@ package restaurant.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.control.*;
 import javafx.scene.layout.HBox;
 import javafx.scene.layout.VBox;
@@ -61,6 +62,7 @@ public class MenuManagementUI extends Notification{
         VBox mainLayout = new VBox(10);
         mainLayout.getChildren().addAll(table, inputLayout);
 
+        mainLayout.setPadding(new Insets(10));
         return mainLayout;
     }
 

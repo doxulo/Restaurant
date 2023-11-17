@@ -2,6 +2,7 @@ package restaurant.ui;
 
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.geometry.Insets;
 import javafx.scene.control.Button;
 import javafx.scene.control.TableColumn;
 import javafx.scene.control.TableView;
@@ -51,6 +52,8 @@ public class EmployeeManagementUI extends Notification {
         // Main layout
         VBox mainLayout = new VBox(10);
         mainLayout.getChildren().addAll(table, inputLayout);
+
+        mainLayout.setPadding(new Insets(10));
 
         return mainLayout;
     }

@@ -55,17 +55,14 @@ public class OrderUI {
         HBox.setHgrow(menuItemsTable, Priority.ALWAYS);
         HBox.setHgrow(orderItemsTable, Priority.ALWAYS);
 
-        tablesLayout.setPadding(new Insets(10));
-
         HBox controlsLayout = new HBox(10);
         controlsLayout.getChildren().addAll(categoryFilter, quantityInput, addToOrderButton, clearOrderButton);
-
-        controlsLayout.setPadding(new Insets(0, 10, 0, 10));
 
         VBox mainLayout = new VBox(10);
         mainLayout.getChildren().addAll(tablesLayout, controlsLayout);
         VBox.setMargin(controlsLayout, new Insets(10, 0, 0, 0)); // Add margin for better spacing
 
+        mainLayout.setPadding(new Insets(10));
         return mainLayout;
     }
 
