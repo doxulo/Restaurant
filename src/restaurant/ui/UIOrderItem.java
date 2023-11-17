@@ -13,7 +13,7 @@ public class UIOrderItem {
         this.quantity = new SimpleIntegerProperty(quantity);;
     }
 
-    
+    // Getters and setters
     public MenuItem getMenuItem() {
         return menuItem;
     }

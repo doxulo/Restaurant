@@ -6,7 +6,7 @@ public class Inventory {
     private int quantity;
     private int reorderLevel;
 
-    
+    // Constructor
     public Inventory(int inventoryId, String itemName, int quantity, int reorderLevel) {
         this.inventoryId = inventoryId;
         this.itemName = itemName;
@@ -14,7 +14,7 @@ public class Inventory {
         this.reorderLevel = reorderLevel;
     }
 
-    
+    // Getters and Setters
     public int getInventoryId() {
         return inventoryId;
     }
@@ -47,7 +47,7 @@ public class Inventory {
         this.reorderLevel = reorderLevel;
     }
 
-    
+    // toString method for easy printing of Inventory details
     @Override
     public String toString() {
         return "Inventory{" +

@@ -7,7 +7,7 @@ public class Employee {
     private String contactInfo;
     private String hireDate;
 
-    
+    // Constructor
     public Employee(int employeeId, String name, String role, String contactInfo, String hireDate) {
         this.employeeId = employeeId;
         this.name = name;
@@ -16,7 +16,7 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    
+    // Getters
     public int getEmployeeId() {
         return employeeId;
     }
@@ -37,7 +37,7 @@ public class Employee {
         return hireDate;
     }
 
-    
+    // Setters
     public void setEmployeeId(int employeeId) {
         this.employeeId = employeeId;
     }
@@ -58,7 +58,7 @@ public class Employee {
         this.hireDate = hireDate;
     }
 
-    
+    // toString method for easy printing of Employee details
     @Override
     public String toString() {
         return "Employee{" +

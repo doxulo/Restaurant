@@ -11,7 +11,7 @@ import java.util.List;
 
 public class MenuItemDAO {
 
-    
+    // Insert MenuItem
     public void insertMenuItem(MenuItem item) {
         String sql = "INSERT INTO MenuItems (ItemID, Name, Description, Price, Category) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnector.connect();
@@ -26,7 +26,7 @@ public class MenuItemDAO {
         }
     }
 
-    
+    // Get Menu Item by ID
     public MenuItem getMenuItemById(int itemId) {
         String sql = "SELECT * FROM MenuItems WHERE ItemID = ?";
         MenuItem menuItem = null;
@@ -51,7 +51,7 @@ public class MenuItemDAO {
         return menuItem;
     }
 
-    
+    // Get All MenuItems
     public List<MenuItem> getAllMenuItems() {
         List<MenuItem> menuItems = new ArrayList<>();
         String sql = "SELECT * FROM MenuItems";
@@ -73,7 +73,7 @@ public class MenuItemDAO {
         return menuItems;
     }
 
-    
+    // Update MenuItem
     public void updateMenuItem(MenuItem item) {
         String sql = "UPDATE MenuItems SET Name = ?, Description = ?, Price = ?, Category = ? WHERE ItemID = ?";
         try (Connection conn = DatabaseConnector.connect();
@@ -88,7 +88,7 @@ public class MenuItemDAO {
             System.out.println(e.getMessage());
         }
     }
-    
+    // Delete MenuItem
 
     public void deleteMenuItem(int itemId) {
         String sql = "DELETE FROM MenuItems WHERE ItemID = ?";

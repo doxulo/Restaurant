@@ -8,7 +8,7 @@ public class Order {
     private double totalAmount;
     private String status;
 
-    
+    // Constructor
     public Order(int orderId, int customerId, int employeeId, String orderDate, double totalAmount, String status) {
         this.orderId = orderId;
         this.customerId = customerId;
@@ -18,7 +18,7 @@ public class Order {
         this.status = status;
     }
 
-    
+    // Getters
     public int getOrderId() {
         return orderId;
     }
@@ -43,7 +43,7 @@ public class Order {
         return status;
     }
 
-    
+    // Setters
     public void setOrderId(int orderId) {
         this.orderId = orderId;
     }
@@ -68,7 +68,7 @@ public class Order {
         this.status = status;
     }
 
-    
+    // toString method for easy printing of Order details
     @Override
     public String toString() {
         return "Order{" +

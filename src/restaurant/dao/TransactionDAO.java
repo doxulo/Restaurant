@@ -11,7 +11,7 @@ import java.util.List;
 
 public class TransactionDAO {
 
-    
+    // Insert Transaction
     public void insertTransaction(Transaction transaction) {
         String sql = "INSERT INTO Transactions (TransactionID, OrderID, PaymentType, Amount, TransactionDate) VALUES (?, ?, ?, ?, ?)";
         try (Connection conn = DatabaseConnector.connect();
@@ -27,7 +27,7 @@ public class TransactionDAO {
         }
     }
 
-    
+    // Get All Transactions
     public List<Transaction> getAllTransactions() {
         List<Transaction> transactions = new ArrayList<>();
         String sql = "SELECT * FROM Transactions";
@@ -49,7 +49,7 @@ public class TransactionDAO {
         return transactions;
     }
 
-    
+    // Update Transaction
     public void updateTransaction(Transaction transaction) {
         String sql = "UPDATE Transactions SET OrderID = ?, PaymentType = ?, Amount = ?, TransactionDate = ? WHERE TransactionID = ?";
         try (Connection conn = DatabaseConnector.connect();
@@ -65,7 +65,7 @@ public class TransactionDAO {
         }
     }
 
-    
+    // Delete Transaction
     public void deleteTransaction(int transactionId) {
         String sql = "DELETE FROM Transactions WHERE TransactionID = ?";
         try (Connection conn = DatabaseConnector.connect();
